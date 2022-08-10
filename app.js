@@ -28,9 +28,23 @@ database();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var retrievedData;
+
 // Actual routing
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index', {
+        retrievedData: retrievedData
+    });
+
+    // var query = { name: 'Bibu' };
+    userSchema.find({}).exec(function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            retrievedData = data;
+            console.log(`${retrievedData.length} Data retrieved successfully!`)
+        }
+    });
 });
 
 app.post('/', (req, res) => {
@@ -44,15 +58,12 @@ app.post('/', (req, res) => {
         if (err) {
             console.log('Data not inserted: ' + err)
         } else {
-            res.send('Data inserted successfully')
+            console.log('Data inserted successfully')
         }
     });
 
     res.redirect('/')
 });
-
-
-// const PORT = process.env.PORT || '8080'
 
 app.listen(PORT, () => {
     console.log("Listening on port: " + PORT);

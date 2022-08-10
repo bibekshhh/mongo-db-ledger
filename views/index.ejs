@@ -15,11 +15,18 @@
             font-family: 'Roboto', sans-serif;
         }
         
-        .wrapper {
+        .container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .wrapper {
             width: max-content;
             display: flex;
             flex-direction: column;
@@ -70,19 +77,84 @@
             background-color: black;
             cursor: pointer;
         }
+        
+        .wrapper-list {
+            width: 500px;
+            height: 500px;
+            background-color: aliceblue;
+            padding: 10px 20px;
+            margin-left: 20px;
+        }
+        
+        .wrapper-list table {
+            width: 100%;
+            max-height: 100%;
+            overflow: auto;
+        }
+        
+        .wrapper-list table th,
+        .wrapper-list table tr {
+            border: 2px solid black;
+            text-align: center;
+            line-height: 30px;
+            background-color: white;
+        }
+        
+        .wrapper-list table tr button.delete {
+            padding: 5px 10px;
+            color: white;
+            border: 1px solid #cccc;
+            background-color: red;
+            cursor: pointer;
+        }
+        
+        .wrapper-list table tr button.delete:hover {
+            background-color: rgb(202, 4, 4);
+        }
     </style>
 </head>
 
 <body>
-    <div class="wrapper">
-        <p class="text-header">User Ledger</p>
-        <form action="/" method="POST">
-            <input type="text" name="name" placeholder="Enter your name" autocomplete="off">
-            <input type="text" name="email" placeholder="Enter your email" autocomplete="off">
-            <input type="text" name="password" placeholder="Enter your password" autocomplete="off">
-            <button type="submit" name="submitBtn">Submit</button>
-        </form>
+    <div class="container">
+        <div class="wrapper">
+            <p class="text-header">User Ledger</p>
+            <form action="/" method="post">
+                <input type="text" name="name" placeholder="Enter your name" autocomplete="off">
+                <input type="text" name="email" placeholder="Enter your email" autocomplete="off">
+                <input type="text" name="password" placeholder="Enter your password" autocomplete="off">
+                <button type="submit" name="submitBtn">Submit</button>
+            </form>
+        </div>
+        <div class="wrapper-list">
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>password</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <% retrievedData.forEach(item => { %>
+                        <tr>
+                            <td>
+                                <%= item.name %>
+                            </td>
+                            <td>
+                                <%= item.email %>
+                            </td>
+                            <td>
+                                <%= item.password %>
+                            </td>
+                            <td>
+                                <button class="delete" name="">Delete</button>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </body>
 
 </html>
