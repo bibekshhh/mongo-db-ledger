@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userSchema = require('./model/db')
 
+const PORT = process.env.PORT || 5050;
 const app = express();
 
 const database = () => {
@@ -51,8 +52,8 @@ app.post('/', (req, res) => {
 });
 
 
-const PORT = process.env.PORT || '8080'
+// const PORT = process.env.PORT || '8080'
 
-app.set("port", PORT)
-
-app.listen(process.env.PORT || 8000)
+app.listen(PORT, () => {
+    console.log("Listening on port: " + PORT);
+})
