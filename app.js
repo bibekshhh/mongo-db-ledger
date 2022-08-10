@@ -51,6 +51,10 @@ app.post('/', (req, res) => {
 });
 
 
-app.listen(5050, () => {
-    console.log("Listening on port 5050");
+const PORT = process.env.PORT || '8080'
+
+app.set("port", PORT)
+
+app.listen(PORT, () => {
+    console.log("Listening on port: " + PORT);
 })
