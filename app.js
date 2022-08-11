@@ -27,16 +27,14 @@ database();
 //set the view engine to ejs
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
-
 var retrievedData;
 
 // Actual routing
-app.get('/', (req, res) => {
+app.route('/').get((req, res) => {
     res.render('index', {
         retrievedData: retrievedData
     });
 
-    // var query = { name: 'Bibu' };
     userSchema.find({}).exec(function(err, data) {
         if (err) {
             console.log(err);
@@ -47,7 +45,18 @@ app.get('/', (req, res) => {
     });
 });
 
-app.post('/', (req, res) => {
+app.route('/:name').get((req, res) => {
+
+    var query = req.params;
+    userSchema.findOneAndRemove(query, (err, data) => {
+        if (err) throw err
+        console.log('Data for ' + data.name + ' deleted successfully')
+    });
+
+    res.redirect('/');
+});
+
+app.route('/').post((req, res) => {
     var newUser = new userSchema();
 
     newUser.name = req.body.name;

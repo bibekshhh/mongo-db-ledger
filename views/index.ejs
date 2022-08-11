@@ -111,6 +111,11 @@
         .wrapper-list table tr button.delete:hover {
             background-color: rgb(202, 4, 4);
         }
+        
+        .wrapper-list table tr button.delete a {
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 
@@ -135,7 +140,7 @@
                 </thead>
                 <tbody>
                     <% retrievedData.forEach(item => { %>
-                        <tr>
+                        <tr class="item">
                             <td>
                                 <%= item.name %>
                             </td>
@@ -146,7 +151,7 @@
                                 <%= item.password %>
                             </td>
                             <td>
-                                <button class="delete" name="">Delete</button>
+                                <button class="delete"><a href="/<%= item.name %>">Delete</a></button>
                             </td>
                         </tr>
                         <% }); %>
