@@ -14,7 +14,7 @@ const database = () => {
     }
 
     try {
-        mongoose.connect('mongodb+srv://bibekshah:bibek123@cluster0.dsfsc1m.mongodb.net/?retryWrites=true&w=majority', connectionParams);
+        mongoose.connect(<your mongoDB API>, connectionParams);
         console.log("Databse connected successfully!")
     } catch (err) {
         console.log(error)
